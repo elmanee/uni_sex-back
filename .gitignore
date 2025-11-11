@@ -1,0 +1,14 @@
+# Dependencias de Node
+node_modules/
+
+dist/
+build/
+
+.env
+.env.*
+
+uploads/
+
+npm-debug.log*
+
+.DS_Store
