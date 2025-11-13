@@ -7,22 +7,21 @@ import {
   actualizarEstudiante,
 } from '../controllers/estudianteController';
 import { uploadArchivos } from '../services/archivoService';
+import { authenticateToken } from '../middleware/verifyToken'; 
 
 const router = Router();
 
-// Registrar estudiante con archivos
-router.post('/estudiantes', uploadArchivos, registrarEstudiante);
+router.use(authenticateToken);
 
-// Obtener todos los estudiantes
-router.get('/estudiantes', obtenerEstudiantes);
+router.post('/', uploadArchivos, registrarEstudiante); 
 
-// Obtener estudiante por matrícula
-router.get('/estudiantes/:matricula', obtenerEstudiantePorMatricula);
+router.get('/', obtenerEstudiantes); 
 
-// Actualizar estudiante (solo los campos enviados)
-router.patch('/estudiantes/:matricula', uploadArchivos, actualizarEstudiante);
 
-// Obtener catálogos
+router.get('/:matricula', obtenerEstudiantePorMatricula); 
+router.patch('/:matricula', uploadArchivos, actualizarEstudiante); 
+
+
 router.get('/catalogos/:tipo', obtenerCatalogo);
 
 export default router;
